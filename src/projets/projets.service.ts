@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Projet } from './entities/projet.entity';
 
 @Injectable()
 export class ProjetsService {
@@ -6,8 +7,16 @@ export class ProjetsService {
     return this.projets;
   }
 
+  obtenir(id: number) {
+    const projet = this.projets.find((projet) => {
+      return projet.id === id;
+    });
+
+    return projet;
+  }
+
   private timestamp = new Date().toJSON();
-  private projets = [
+  private projets: Projet[] = [
     {
       id: 1,
       nom: 'LAN Party (NestJS API)',
