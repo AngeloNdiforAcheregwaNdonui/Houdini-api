@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Projet } from './entities/projet.entity';
 import { CreateProjetDto } from './dto/create-projet.dto';
+import { UpdateProjetDto } from './dto/update-projet.dto';
 
 @Injectable()
 export class ProjetsService {
@@ -30,6 +31,22 @@ export class ProjetsService {
     };
 
     this.projets.push(projet);
+    return projet;
+  }
+
+  modifier(id: number, updateProjetDto: UpdateProjetDto) {
+    const projetIndex = this.projets.findIndex((projet) => {
+      return projet.id === id;
+    });
+    const projet = this.projets[projetIndex];
+
+    if (projet) {
+      projet.nom = updateProjetDto.nom || projet.nom;
+      projet.description = updateProjetDto.description || projet.description;
+      projet.date_modification = new Date().toJSON();
+      this.projets.splice(projetIndex, 1, projet);
+    }
+
     return projet;
   }
 
