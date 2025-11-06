@@ -50,6 +50,16 @@ export class ProjetsService {
     return projet;
   }
 
+  supprimer(id: number) {
+    const projetIndex = this.projets.findIndex((projet) => {
+      return projet.id === id;
+    });
+
+    if (projetIndex !== -1) {
+      this.projets.splice(projetIndex, 1);
+    }
+  }
+
   private timestamp = new Date().toJSON();
   private projets: Projet[] = [
     {

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -40,5 +41,14 @@ export class ProjetsController {
     if (!projet) throw new NotFoundException();
 
     return this.projetsService.modifier(+id, updateProjetDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    const projet = this.projetsService.obtenir(+id);
+
+    if (!projet) throw new NotFoundException();
+
+    return this.projetsService.supprimer(+id);
   }
 }
