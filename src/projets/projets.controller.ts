@@ -1,5 +1,13 @@
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { ProjetsService } from './projets.service';
+import { CreateProjetDto } from './dto/create-projet.dto';
 
 @Controller('projets')
 export class ProjetsController {
@@ -16,5 +24,10 @@ export class ProjetsController {
   @Get()
   findAll() {
     return this.projetsService.obtenirTous();
+  }
+
+  @Post()
+  create(@Body() createProjetDto: CreateProjetDto) {
+    return this.projetsService.creer(createProjetDto);
   }
 }
