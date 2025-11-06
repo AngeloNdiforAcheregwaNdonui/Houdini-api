@@ -16,7 +16,6 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiResponse,
 } from '@nestjs/swagger';
 
 @Controller('projets')
