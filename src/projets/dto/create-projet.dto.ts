@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
+import { i18nValidationMessage } from 'nestjs-i18n';
 
 export class CreateProjetDto {
   @ApiProperty({
@@ -7,7 +8,7 @@ export class CreateProjetDto {
     example: 'LAN Party',
   })
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: i18nValidationMessage('validation.NOT_EMPTY') })
   nom: string;
 
   @ApiProperty({
@@ -15,7 +16,7 @@ export class CreateProjetDto {
     example: "Tout ce qui à trait à l'organisation du LAN Party",
   })
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: i18nValidationMessage('validation.NOT_EMPTY') })
   @MinLength(3)
   description: string;
 
